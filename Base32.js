@@ -1,15 +1,18 @@
 function testscript(str) {
     var list_ascii = convert_ascii(str)
-    alert(list_ascii);
+    console.log(list_ascii);
 
     var list_binary = convert_binary(list_ascii);
-    alert(list_binary)
+    console.log(list_binary)
 
     var binary_str = list_binary.join('');
-    alert(binary_str);
+    console.log(binary_str);
 
     var split5_list = split_5bit(binary_str);
-    alert(split5_list);
+    console.log(split5_list);
+
+    var list_decimal = binary_to_decimal(split5_list);
+    console.log(list_decimal);
 }
 
 function convert_ascii(str) {
@@ -46,6 +49,13 @@ function split_5bit(str) {
             }
             list[index] = res;
         }
+    }
+    return list;
+}
+
+function binary_to_decimal(list) {
+    for(var i = 0; i < list.length; i++) {
+        list[i] = parseInt(list[i],2);
     }
     return list;
 }
