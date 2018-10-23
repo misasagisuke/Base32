@@ -21,23 +21,33 @@
 // SOFTWARE.
 
 function testscript(str) {
-    console.log('input : ' + str);
+    alert('input : ' + str);
 
-    console.log(base32_encode(str));
+    alert('encode : ' + encode(str));
 
-    var list = unpadding(base32_encode(str));
-    list = unconvert_on_dictionary(list);
-    console.log(list);
+    alert('decode : ' + decode(encode(str)));
+    
 }
 
-function base32_encode(str) {
+function encode(str) {
     var list = convert_ascii(str);
     list = convert_binary(list);
+    list = display_8bit(list);
     str = list.join('');
     list = split_5bit(str);
     list = binary_to_decimal(list);
     list = convert_on_dictionary(list);
     return padding(list.join(''));
+}
+
+function decode(str) {
+    var list = unpadding(str);
+    list = unconvert_on_dictionary(list);
+    list = convert_binary(list);
+    list = display_5bit(list);
+    list = split_8bit(list);
+    list = binary_to_decimal(list);
+    return ascii_to_string(list);
 }
 
 const Dictionary = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7'];
@@ -54,7 +64,6 @@ function convert_binary(list) {
     for(var i = 0; i < list.length; i++) {
         list[i] = list[i].toString(2);
     }
-    console.log(list);
     return list;
 }
 
@@ -120,8 +129,53 @@ function unconvert_on_dictionary(list) {
         for(var j = 0; j < Dictionary.length; j++) {
             if(list[i] == Dictionary[j]) {
                 list[i] = j;
+                break;
             }
         }
     }
     return list;
+}
+
+function display_5bit(list) {
+    for(var i = 0; i < list.length; i++) {
+        var sub = 5-list[i].length;
+        for(var j = 0; j < sub; j++) {
+            list[i] = '0' + list[i];
+        }
+    }
+    return list;
+}
+
+function display_8bit(list) {
+    for(var i = 0; i < list.length; i++) {
+        var sub = 8-list[i].length;
+        for(var j = 0; j < sub; j++) {
+            list[i] = '0' + list[i];
+        }
+    }
+    return list;
+}
+
+function split_8bit(list) {
+    var input_list = list.join('').split('');
+    var res = new Array();
+    var index = 0;
+    var str = '';
+    for(var i = 0; i < input_list.length; i++) {
+        str = str + input_list[i];
+
+        if((i+1) % 8 == 0) {
+            res[index] = str;
+            index ++;
+            str = '';
+        } 
+    }
+    return res;
+}
+
+function ascii_to_string(list) {
+    for(var i = 0; i < list.length; i++) {
+        list[i] = String.fromCharCode(list[i]);
+    }
+    return list.join('');
 }
