@@ -1,4 +1,6 @@
 function testscript(str) {
+    console.log('input : ' + str);
+
     var list_ascii = convert_ascii(str)
     console.log(list_ascii);
 
@@ -13,6 +15,9 @@ function testscript(str) {
 
     var list_decimal = binary_to_decimal(split5_list);
     console.log(list_decimal);
+
+    var list_convert = convert_on_dictionary(list_decimal);
+    console.log(list_convert);
 }
 
 const Dictionary = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7', '='];
@@ -58,6 +63,13 @@ function split_5bit(str) {
 function binary_to_decimal(list) {
     for(var i = 0; i < list.length; i++) {
         list[i] = parseInt(list[i],2);
+    }
+    return list;
+}
+
+function convert_on_dictionary(list) {
+    for(var i = 0; i < list.length; i++) {
+        list[i] = Dictionary[list[i]];
     }
     return list;
 }
