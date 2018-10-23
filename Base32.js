@@ -1,26 +1,20 @@
 function testscript(str) {
     console.log('input : ' + str);
 
-    var list_ascii = convert_ascii(str)
-    console.log(list_ascii);
-
-    var list_binary = convert_binary(list_ascii);
-    console.log(list_binary)
-
-    var binary_str = list_binary.join('');
-    console.log(binary_str);
-
-    var split5_list = split_5bit(binary_str);
-    console.log(split5_list);
-
-    var list_decimal = binary_to_decimal(split5_list);
-    console.log(list_decimal);
-
-    var list_convert = convert_on_dictionary(list_decimal);
-    console.log(list_convert);
+    console.log(base32_encode(str));
 }
 
-const Dictionary = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7', '='];
+function base32_encode(str) {
+    var list = convert_ascii(str);
+    list = convert_binary(list);
+    str = list.join('');
+    list = split_5bit(str);
+    list = binary_to_decimal(list);
+    list = convert_on_dictionary(list);
+    return padding(list.join(''));
+}
+
+const Dictionary = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7'];
 
 function convert_ascii(str) {
     var list = str.split("");
@@ -73,3 +67,11 @@ function convert_on_dictionary(list) {
     }
     return list;
 }
+
+function padding(str) {
+    var sub = str.length % 8;
+    for (var i = 0; i < sub; i++) {
+        str = str + '=';
+    }
+    return str;
+} 
