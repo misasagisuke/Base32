@@ -24,6 +24,10 @@ function testscript(str) {
     console.log('input : ' + str);
 
     console.log(base32_encode(str));
+
+    var list = unpadding(base32_encode(str));
+    list = unconvert_on_dictionary(list);
+    console.log(list);
 }
 
 function base32_encode(str) {
@@ -39,7 +43,7 @@ function base32_encode(str) {
 const Dictionary = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7'];
 
 function convert_ascii(str) {
-    var list = str.split("");
+    var list = str.split('');
     for(var i = 0; i < list.length; i++) {
         list[i] = list[i].charCodeAt(0);
     }
@@ -50,6 +54,7 @@ function convert_binary(list) {
     for(var i = 0; i < list.length; i++) {
         list[i] = list[i].toString(2);
     }
+    console.log(list);
     return list;
 }
 
@@ -97,3 +102,26 @@ function padding(str) {
     }
     return str;
 } 
+
+function unpadding(str) {
+    var list = str.split('');
+    var res = new Array();
+    for(var i = 0; i < list.length; i++) {
+        if(list[i] == '='){
+            break;
+        }
+        res[i] = list[i];
+    }
+    return res;
+}
+
+function unconvert_on_dictionary(list) {
+    for(var i = 0; i < list.length; i++) {
+        for(var j = 0; j < Dictionary.length; j++) {
+            if(list[i] == Dictionary[j]) {
+                list[i] = j;
+            }
+        }
+    }
+    return list;
+}
