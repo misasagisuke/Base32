@@ -15,6 +15,8 @@ function testscript(str) {
     console.log(list_decimal);
 }
 
+const Dictionary = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7', '='];
+
 function convert_ascii(str) {
     var list = str.split("");
     for(var i = 0; i < list.length; i++) {
