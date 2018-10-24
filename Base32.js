@@ -20,6 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+//Test run functions
 function testscript(str) {
     alert('input : ' + str);
 
@@ -29,6 +30,7 @@ function testscript(str) {
     
 }
 
+//Encode the passed string with Base32
 function base32_encode(str) {
     var list = convert_ascii(str);
     list = convert_binary(list);
@@ -40,6 +42,7 @@ function base32_encode(str) {
     return padding(list.join(''));
 }
 
+//Decode the passed string with Base32
 function base32_decode(str) {
     var list = unpadding(str);
     list = unconvert_on_dictionary(list);
@@ -50,6 +53,7 @@ function base32_decode(str) {
     return ascii_to_string(list);
 }
 
+//Dictionary for Conversion
 const Dictionary = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7'];
 
 function convert_ascii(str) {
