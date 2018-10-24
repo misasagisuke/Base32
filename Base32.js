@@ -23,13 +23,13 @@
 function testscript(str) {
     alert('input : ' + str);
 
-    alert('encode : ' + encode(str));
+    alert('encode : ' + base32_encode(str));
 
-    alert('decode : ' + decode(encode(str)));
+    alert('decode : ' + base32_decode(base32_encode(str)));
     
 }
 
-function encode(str) {
+function base32_encode(str) {
     var list = convert_ascii(str);
     list = convert_binary(list);
     list = display_8bit(list);
@@ -40,7 +40,7 @@ function encode(str) {
     return padding(list.join(''));
 }
 
-function decode(str) {
+function base32_decode(str) {
     var list = unpadding(str);
     list = unconvert_on_dictionary(list);
     list = convert_binary(list);
