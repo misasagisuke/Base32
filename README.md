@@ -1,7 +1,7 @@
 Base32.js
 ====
 
-Encoding and decoding BASE32 in JavaScript.
+Encode and decode BASE32 in JavaScript.
 
 ## Usage
  Encode
