@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta charset="utf-8">
 <title></title>
@@ -11,7 +14,49 @@
 <script src="./Base32.js"></script>
 </head>
 <body>
-    <p>TEXT: ABCDEFGH123456　をBase32エンコードする</p>
- <button onclick="testscript('ABCDEFGH123456')">button</button>
+    <!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+          <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Base32 Test Page</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+          </div>
+        </header>
+        <main class="mdl-layout__content">
+          <div class="page-content">
+              <br><br>
+                <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="sample1">
+                        <label class="mdl-textfield__label" for="sample1">String...</label>
+                </div>
+
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="testscript()">
+                        Encode →
+                </button>
+
+                <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="sample2" >
+                        <label class="mdl-textfield__label" for="sample2">Encode by base32...</label>
+                </div>
+
+                <br><br>
+                <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="sample1">
+                        <label class="mdl-textfield__label" for="sample1">String...</label>
+                </div>
+
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="testscript()">
+                        Decode →
+                </button>
+
+                <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="sample2" >
+                        <label class="mdl-textfield__label" for="sample2">Decode by base32...</label>
+                </div>
+          </div>
+        </main>
+      </div>
 </body>
 </html>
