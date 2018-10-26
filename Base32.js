@@ -32,22 +32,21 @@ function testscript(str) {
 
 //Encode the passed string with Base32
 function base32_encode(str) {
-    var list = convert_ascii(str);
-    list = convert_binary(list);
-    list = display_8bit(list);
-    str = list.join('');
-    list = split_5bit(str);
+    var list = convert_to_ascii(str);
+    list = convert_to_binary(list);
+    list = split_by_8bit(list);
+    list = split_by_5bit(list.join(''));
     list = binary_to_decimal(list);
-    list = convert_on_dictionary(list);
+    list = translation(list);
     return padding(list.join(''));
 }
 
 //Decode the passed string with Base32
 function base32_decode(str) {
-    var list = unpadding(str);
-    list = unconvert_on_dictionary(list);
-    list = convert_binary(list);
-    list = display_5bit(list);
+    var list = remove_padding(str);
+    list = reverse_translation(list);
+    list = convert_to_binary(list);
+    list = split_5bit(list);
     list = split_8bit(list);
     list = binary_to_decimal(list);
     return ascii_to_string(list);
@@ -56,7 +55,7 @@ function base32_decode(str) {
 //Dictionary for Conversion
 const Dictionary = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7'];
 
-function convert_ascii(str) {
+function convert_to_ascii(str) {
     var list = str.split('');
     for(var i = 0; i < list.length; i++) {
         list[i] = list[i].charCodeAt(0);
@@ -64,14 +63,14 @@ function convert_ascii(str) {
     return list;
 }
 
-function convert_binary(list) {
+function convert_to_binary(list) {
     for(var i = 0; i < list.length; i++) {
         list[i] = list[i].toString(2);
     }
     return list;
 }
 
-function split_5bit(str) {
+function split_by_5bit(str) {
     var res = "";
     var input_list = str.split('');
     var list = new Array();
@@ -101,7 +100,7 @@ function binary_to_decimal(list) {
     return list;
 }
 
-function convert_on_dictionary(list) {
+function translation(list) {
     for(var i = 0; i < list.length; i++) {
         list[i] = Dictionary[list[i]];
     }
@@ -116,7 +115,7 @@ function padding(str) {
     return str;
 } 
 
-function unpadding(str) {
+function remove_padding(str) {
     var list = str.split('');
     var res = new Array();
     for(var i = 0; i < list.length; i++) {
@@ -128,7 +127,7 @@ function unpadding(str) {
     return res;
 }
 
-function unconvert_on_dictionary(list) {
+function reverse_translation(list) {
     for(var i = 0; i < list.length; i++) {
         for(var j = 0; j < Dictionary.length; j++) {
             if(list[i] == Dictionary[j]) {
@@ -140,7 +139,7 @@ function unconvert_on_dictionary(list) {
     return list;
 }
 
-function display_5bit(list) {
+function split_5bit(list) {
     for(var i = 0; i < list.length; i++) {
         var sub = 5-list[i].length;
         for(var j = 0; j < sub; j++) {
@@ -150,7 +149,7 @@ function display_5bit(list) {
     return list;
 }
 
-function display_8bit(list) {
+function split_by_8bit(list) {
     for(var i = 0; i < list.length; i++) {
         var sub = 8-list[i].length;
         for(var j = 0; j < sub; j++) {
