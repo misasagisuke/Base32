@@ -7,7 +7,7 @@ Encode and decode BASE32 in JavaScript.
  Encode
  ```javascript
  var passphrase = 'hogehoge';
- var base32_str = encobase32_encodede(passphrase);
+ var base32_str = base32_encode(passphrase);
  ```
  Decode
  ```javascript
