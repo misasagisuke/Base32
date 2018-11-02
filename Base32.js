@@ -20,15 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-//Test run functions
-function testscript(str) {
-    alert('input : ' + str);
-
-    alert('encode : ' + base32_encode(str));
-
-    alert('decode : ' + base32_decode(base32_encode(str)));
-    
-}
 
 //Encode the passed string with Base32
 function base32_encode(str) {
