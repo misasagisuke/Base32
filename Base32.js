@@ -100,7 +100,7 @@ function translation(list) {
 
 function padding(str) {
     var sub = str.length % 8;
-    for (var i = 0; i < sub; i++) {
+    for (var i = 8; i < sub; i++) {
         str = str + '=';
     }
     return str;
