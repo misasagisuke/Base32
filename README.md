@@ -7,6 +7,10 @@ Encode and decode BASE32 in JavaScript.
 https://rwadada.github.io/base32/test.html
 
 ## Usage
+ Load library
+ ```html
+<script src='https://rwadada.github.io/base32/Base32.js></script>
+ ```
  Encode
  ```javascript
  var passphrase = 'hogehoge';
