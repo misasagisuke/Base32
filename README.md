@@ -3,6 +3,9 @@ Base32.js
 
 Encode and decode BASE32 in JavaScript.
 
+## Sample
+https://rwadada.github.io/base32/test.html
+
 ## Usage
  Encode
  ```javascript
